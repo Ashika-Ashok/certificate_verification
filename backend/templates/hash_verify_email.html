@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Email Verification</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="result-bg">
+    <div class="result-card">
+      <h2 class="result-title">Email Verification</h2>
+      <p class="reason">Please enter your email to receive a verification OTP.</p>
+      <form action="{{ url_for('verify_hash_otp') }}" method="POST" class="identity-fields">
+        <div class="floating-input">
+          <input type="email" name="otp_email" id="otp_email" placeholder=" " required value="{{ email }}">
+          <label for="otp_email">Email Address</label>
+        </div>
+        <button type="submit" class="back-button">Send OTP</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

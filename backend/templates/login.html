@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Login</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Orbitron',sans-serif;
+}
+
+/* Background */
+
+body{
+
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+
+background:#020617;
+overflow:hidden;
+
+}
+
+/* Blockchain grid background */
+
+body::before{
+
+content:"";
+position:absolute;
+width:200%;
+height:200%;
+
+background-image:
+linear-gradient(rgba(0,255,255,0.1) 1px,transparent 1px),
+linear-gradient(90deg,rgba(0,255,255,0.1) 1px,transparent 1px);
+
+background-size:60px 60px;
+
+animation:gridMove 12s linear infinite;
+
+}
+
+@keyframes gridMove{
+
+0%{
+transform:translate(0,0);
+}
+
+100%{
+transform:translate(-60px,-60px);
+}
+
+}
+
+/* Glass card */
+
+.card{
+
+position:relative;
+width:350px;
+padding:40px;
+
+background:rgba(10,15,40,0.6);
+border-radius:15px;
+
+backdrop-filter:blur(20px);
+
+border:1px solid rgba(0,255,255,0.3);
+
+box-shadow:
+
+0 0 15px #00ffff,
+0 0 40px rgba(0,255,255,0.4);
+
+color:white;
+
+}
+
+.card h2{
+
+text-align:center;
+margin-bottom:25px;
+color:#00ffff;
+
+}
+
+/* Inputs */
+
+input{
+
+width:100%;
+padding:12px;
+margin:12px 0;
+
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(0,255,255,0.3);
+
+border-radius:8px;
+
+color:white;
+outline:none;
+
+transition:0.3s;
+
+}
+
+input::placeholder{
+
+color:#94a3b8;
+
+}
+
+input:focus{
+
+box-shadow:
+
+0 0 10px #00ffff,
+0 0 20px #8b5cf6;
+
+border-color:#8b5cf6;
+
+}
+
+/* Button */
+
+button{
+
+width:100%;
+padding:12px;
+
+border:none;
+border-radius:8px;
+
+background:linear-gradient(135deg,#00ffff,#8b5cf6);
+
+color:black;
+font-weight:600;
+
+cursor:pointer;
+
+transition:0.3s;
+
+}
+
+button:hover{
+
+box-shadow:
+
+0 0 15px #00ffff,
+0 0 30px #8b5cf6;
+
+transform:scale(1.05);
+
+}
+
+p{
+
+text-align:center;
+margin-top:15px;
+
+}
+
+a{
+
+color:#00ffff;
+text-decoration:none;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+<h2>Blockchain Login</h2>
+
+<form method="POST">
+
+<input type="email" name="email" placeholder="Email">
+
+<input type="password" name="password" placeholder="Password">
+
+<button type="submit">Login</button>
+
+</form>
+
+<p>No account? <a href="/signup">Create Account</a></p>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Enter OTP</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="result-bg">
+    <div class="result-card">
+      <h2 class="result-title">Enter OTP</h2>
+      <p class="reason">An OTP has been sent to your email. Please enter it below to verify the certificate.</p>
+      <form action="{{ url_for('confirm_hash_otp') }}" method="POST" class="identity-fields">
+        <div class="floating-input">
+          <input type="text" name="otp_input" id="otp_input" placeholder=" " required>
+          <label for="otp_input">Enter OTP</label>
+        </div>
+        <button type="submit" class="back-button">Verify OTP</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

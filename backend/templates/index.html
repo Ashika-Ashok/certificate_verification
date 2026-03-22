@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CertiSure AI - Smart Certificate Verification</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body class="dark-mode"> <!-- ✅ Dark mode always enabled -->
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg fixed-top glass-nav">
+<div class="container">
+
+<a class="navbar-brand logo-text" href="#">
+<span class="logo-shield">◆</span> CertiSure<span class="logo-accent">AI</span>
+</a>
+
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+<span class="navbar-toggler-icon"></span>
+</button>
+
+<div class="collapse navbar-collapse" id="navMenu">
+<ul class="navbar-nav ms-auto nav-custom">
+<li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+<li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+<li class="nav-item"><a class="nav-link" href="#verify">Verify</a></li>
+<li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+</ul>
+
+<!-- ❌ Removed toggle button -->
+
+</div>
+</div>
+</nav>
+
+<!-- HERO -->
+<section id="home" class="hero-section">
+<div class="container text-center">
+<h1 class="display-5 fw-bold hero-title">AI Powered Certificate Verification</h1>
+<p class="lead mt-3 hero-sub">Secure · Intelligent · Enterprise Ready</p>
+<a href="#verify" class="btn btn-primary btn-lg mt-4 action-btn">Start Verification</a>
+</div>
+</section>
+
+<!-- FEATURES -->
+<section id="features" class="py-5">
+<div class="container text-center">
+<h2 class="fw-bold mb-5">Platform Highlights</h2>
+
+<div class="row g-4">
+
+<div class="col-md-4">
+<div class="feature-card">
+<h5>Smart OCR Engine</h5>
+<p>Extracts structured data from certificates instantly.</p>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="feature-card">
+<h5>AI Forgery Detection</h5>
+<p>Analyzes formatting, structure & authenticity.</p>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="feature-card">
+<h5>Blockchain Ready</h5>
+<p>Immutable verification with secure hashing.</p>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- VERIFY -->
+<section id="verify" class="verify-section">
+<div class="container text-center">
+  <h2 class="fw-bold mb-5">Certificate Verification Portal</h2>
+
+  <div class="row g-4">
+
+    <!-- ================= AI VERIFICATION ================= -->
+    <div class="col-lg-6">
+      <div class="upload-box">
+        <h4 class="fw-bold mb-4">Certificate Registration</h4>
+
+        <form id="verifyForm" action="/verify" method="POST" enctype="multipart/form-data">
+
+          <input type="file" name="certificate" id="fileInput" hidden required>
+
+          <div id="dropZone" class="drop-zone">
+            <p class="mb-2">Drag & Drop Certificate</p>
+            <span>or Click to Browse</span>
+          </div>
+
+          <div class="identity-fields mt-4">
+            <div class="floating-input">
+              <input type="email" name="email" required placeholder=" ">
+              <label>Email Address</label>
+            </div>
+
+            <div class="floating-input">
+              <input type="tel" 
+                     name="phone" 
+                     placeholder=" " 
+                     pattern="[0-9]{10}" 
+                     maxlength="10"
+                     required>
+              <label>Phone Number</label>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-success mt-4 action-btn">Verify via AI</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- ================= HASH VERIFICATION ================= -->
+    <div class="col-lg-6">
+      <div class="upload-box">
+        <h4 class="fw-bold mb-4">Certificate Verification</h4>
+
+        <form id="hashOriginalForm" action="/hash_verify_original" method="POST" enctype="multipart/form-data">
+          <p class="fw-semibold">Upload Original Certificate for AI + Hash Verification</p>
+          <input type="file" name="certificate" id="hashOriginalFileInput" hidden required>
+          <div id="hashOriginalDropZone" class="drop-zone">
+            <p class="mb-2">Drag & Drop Original Certificate</p>
+            <span>or Click to Browse</span>
+          </div>
+
+          <div class="identity-fields mt-2">
+            <div class="floating-input">
+              <input type="email" name="email" required placeholder=" ">
+              <label>Email Address</label>
+            </div>
+
+            <div class="floating-input">
+              <input type="tel" name="phone" placeholder=" " pattern="[0-9]{10}" maxlength="10" required>
+              <label>Phone Number</label>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-success mt-4 action-btn">Verify Certificate</button>
+        </form>
+
+        <hr class="my-4" style="border-top: 2px dashed #0d6efd;">
+
+        <form id="hashReportForm" action="/hash_verify_report" method="POST" enctype="multipart/form-data">
+          <p class="fw-semibold">Upload Report PDF to Verify Stored Hash</p>
+          <input type="file" name="hash_certificate" id="hashReportFileInput" hidden required>
+          <div id="hashReportDropZone" class="drop-zone">
+            <p class="mb-2">Drag & Drop Report PDF</p>
+            <span>or Click to Browse</span>
+          </div>
+          <button type="submit" class="btn btn-success mt-4 action-btn">Verify Report Hash</button>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- LOADER -->
+  <div id="loader" class="loader-container d-none">
+    <div class="scan-bar"></div>
+    <p id="loadingText" class="mt-4 loading-text"></p>
+  </div>
+
+</div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="py-5 text-center">
+<div class="container">
+<h5>Enterprise Solutions & API Integration</h5>
+<p>Email: support@certisure.ai</p>
+</div>
+</section>
+
+<footer class="text-center py-4 footer-area">
+© 2026 CertiSure AI. All Rights Reserved.
+</footer>
+
+<script>
+/* Removed dark mode toggle JS completely */
+
+/* ================= AI Drag & Drop ================= */
+const dropZone = document.getElementById("dropZone");
+const fileInput = document.getElementById("fileInput");
+
+dropZone.addEventListener("click", () => fileInput.click());
+
+dropZone.addEventListener("dragover", e => {
+    e.preventDefault();
+    dropZone.classList.add("drag-active");
+});
+
+dropZone.addEventListener("dragleave", () => {
+    dropZone.classList.remove("drag-active");
+});
+
+dropZone.addEventListener("drop", e => {
+    e.preventDefault();
+    fileInput.files = e.dataTransfer.files;
+    dropZone.classList.remove("drag-active");
+    dropZone.innerHTML = "<p>File Selected Successfully</p>";
+});
+
+fileInput.addEventListener("change", function() {
+    if (this.files.length > 0) {
+        dropZone.innerHTML = "<p>File Selected Successfully</p>";
+    }
+});
+
+/* Hash Verification Drag & Drop (unchanged) */
+const hashOriginalDropZone = document.getElementById("hashOriginalDropZone");
+const hashOriginalFileInput = document.getElementById("hashOriginalFileInput");
+
+hashOriginalDropZone.addEventListener("click", () => hashOriginalFileInput.click());
+hashOriginalDropZone.addEventListener("dragover", e => { e.preventDefault(); hashOriginalDropZone.classList.add("drag-active"); });
+hashOriginalDropZone.addEventListener("dragleave", () => { hashOriginalDropZone.classList.remove("drag-active"); });
+hashOriginalDropZone.addEventListener("drop", e => {
+    e.preventDefault();
+    hashOriginalFileInput.files = e.dataTransfer.files;
+    hashOriginalDropZone.classList.remove("drag-active");
+    hashOriginalDropZone.innerHTML = "<p>File Selected Successfully</p>";
+});
+hashOriginalFileInput.addEventListener("change", function() {
+    if (this.files.length > 0) {
+        hashOriginalDropZone.innerHTML = "<p>File Selected Successfully</p>";
+    }
+});
+
+/* Report Upload */
+const hashReportDropZone = document.getElementById("hashReportDropZone");
+const hashReportFileInput = document.getElementById("hashReportFileInput");
+
+hashReportDropZone.addEventListener("click", () => hashReportFileInput.click());
+hashReportDropZone.addEventListener("dragover", e => { e.preventDefault(); hashReportDropZone.classList.add("drag-active"); });
+hashReportDropZone.addEventListener("dragleave", () => { hashReportDropZone.classList.remove("drag-active"); });
+hashReportDropZone.addEventListener("drop", e => {
+    e.preventDefault();
+    hashReportFileInput.files = e.dataTransfer.files;
+    hashReportDropZone.classList.remove("drag-active");
+    hashReportDropZone.innerHTML = "<p>File Selected Successfully</p>";
+});
+hashReportFileInput.addEventListener("change", function() {
+    if (this.files.length > 0) {
+        hashReportDropZone.innerHTML = "<p>File Selected Successfully</p>";
+    }
+});
+
+/* Loader */
+const aiForm = document.getElementById("verifyForm");
+const hashOriginalForm = document.getElementById("hashOriginalForm");
+const loader = document.getElementById("loader");
+const loadingText = document.getElementById("loadingText");
+
+const aiStages = [
+    "Uploading Certificate...",
+    "Extracting Text...",
+    "Running AI Validation...",
+    "Checking Integrity...",
+    "Finalizing Result..."
+];
+
+aiForm.addEventListener("submit", function() {
+    loader.classList.remove("d-none");
+    let i = 0;
+    setInterval(() => {
+        loadingText.innerText = aiStages[i % aiStages.length];
+        i++;
+    }, 1400);
+});
+
+hashOriginalForm.addEventListener("submit", function() {
+    loader.classList.remove("d-none");
+    let i = 0;
+    setInterval(() => {
+        loadingText.innerText = aiStages[i % aiStages.length];
+        i++;
+    }, 1400);
+});
+</script>
+</body>
+</html>

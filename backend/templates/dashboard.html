@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Dashboard</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+
+background:#020617;
+color:white;
+font-family:'Orbitron',sans-serif;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+height:100vh;
+
+}
+
+.panel{
+
+padding:40px;
+
+background:rgba(10,15,40,0.7);
+
+border-radius:15px;
+
+border:1px solid rgba(0,255,255,0.3);
+
+box-shadow:
+
+0 0 20px #00ffff,
+0 0 40px #8b5cf6;
+
+text-align:center;
+
+}
+
+h1{
+
+color:#00ffff;
+
+margin-bottom:15px;
+
+}
+
+a{
+
+display:inline-block;
+margin-top:20px;
+padding:10px 20px;
+
+background:linear-gradient(135deg,#00ffff,#8b5cf6);
+
+border-radius:6px;
+
+color:black;
+font-weight:600;
+text-decoration:none;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="panel">
+
+<h1>Welcome {{user}}</h1>
+
+<p>Blockchain Certificate Dashboard</p>
+
+<a href="/logout">Logout</a>
+
+</div>
+
+</body>
+</html>
